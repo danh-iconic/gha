@@ -1,0 +1,26 @@
+name: Superset
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - feature/**
+      - bugfix/**
+
+env:
+  APP_NAME: Superset
+
+jobs:
+  build-and-push:
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Checkout Github Action
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_RUNNER_GITHUB_TOKEN }}
+          repository: theiconic/gh-actions
+          path: .github/actions
